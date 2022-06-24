@@ -1,0 +1,35 @@
+// parcial
+@import 'config';
+
+// mixin con parametros
+@mixin btn($bg-color, $color, $bold){
+    background-color: $bg-color;
+    color: $color;
+    border-radius: 50px;
+    padding: 20px 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    // validacion
+    @if($bold == 'true'){
+        font-weight: bolder;
+    }
+}
+
+.btn{
+    // afecta a todos los botones que esten al mismo nivel que .btn
+    // el ampersan(&) permite sustituir la clase de arriba(.btn) ejemplo .btn .btn-cta --> &.btn-cta
+    &.btn-cta{
+        @include btn($primary-color, $secondary-color , 'true');
+        &:hover{
+            @include btn($secondary-color, $terciary-color , 'true');
+            box-shadow: $box-shadow;
+        }
+    }
+    &:hover{
+        @include btn($terciary-color, $secondary-color , 'true');
+        box-shadow: $box-shadow;
+    }
+}
